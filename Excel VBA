@@ -1,0 +1,28 @@
+Option Explicit
+Dim k As Long
+Sub test()
+    Dim x, z As Integer
+    z = 5
+    Dim arr(), i As Byte
+    ReDim arr(z)
+    k = 0
+    For i = 0 To z - 1
+        arr(i) = i + 1
+    Next
+    Solver arr, 0
+End Sub
+Function Solver(arr(), m As Byte)
+    Dim i, n As Byte, t As Byte
+    n = 5
+    If m < n - 1 Then
+        Solver arr, m + 1
+        For i = m + 1 To n - 1
+            t = arr(m): arr(m) = arr(i): arr(i) = t
+            Solver arr, m + 1
+            t = arr(m): arr(m) = arr(i): arr(i) = t
+        Next
+    Else
+        k = k + 1
+        Cells(k, 1).Resize(, n) = arr
+    End If
+End Function
